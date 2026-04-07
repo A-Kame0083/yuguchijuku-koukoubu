@@ -70,7 +70,6 @@
             font-weight: 900;
             color: var(--text-color);
             letter-spacing: 1px;
-            z-index: 1001; /* メニューが開いた時もロゴは上に表示 */
         }
         .logo span {
             color: var(--accent-color);
@@ -86,56 +85,6 @@
         }
         .nav-links a:hover {
             color: var(--accent-color);
-        }
-
-        /* === ハンバーガーメニューのアイコン === */
-        .hamburger {
-            display: none; /* PCでは非表示 */
-            flex-direction: column;
-            justify-content: space-between;
-            width: 28px;
-            height: 20px;
-            cursor: pointer;
-            z-index: 1001; /* メニューより上に表示 */
-        }
-        .hamburger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--text-color);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        /* ハンバーガーアイコンが「×」になるアニメーション */
-        .hamburger.active span:nth-child(1) {
-            transform: translateY(8.5px) rotate(45deg);
-            background-color: var(--accent-color);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: translateY(-8.5px) rotate(-45deg);
-            background-color: var(--accent-color);
-        }
-
-        /* メニュー開閉時の背景を暗くするオーバーレイ */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .overlay.active {
-            display: block;
-            opacity: 1;
         }
 
         /* === 1. ヒーローセクション === */
@@ -176,7 +125,6 @@
             line-height: 1.8;
         }
         
-        /* 実績画像部分のデザイン */
         .hero-achievement-img {
             width: 100%;
             max-width: 900px;
@@ -291,26 +239,29 @@
             line-height: 1.8;
             font-weight: bold;
         }
+        
         .school-tags {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
+            gap: 15px 30px;
             margin-top: 30px;
         }
         .school-tags span {
-            background-color: var(--bg-light);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
         }
-        .school-tags span.highlight {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            background-color: #fffafb;
+        .school-tags span::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            margin-right: 10px;
         }
 
         /* === 3. コース紹介セクション (タブUI) === */
@@ -468,6 +419,102 @@
         .accordion-body {
             padding: 30px;
         }
+        .accordion-body img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background-color: #fff;
+            margin: 0 auto;
+        }
+
+        /* === 5. アクセスセクション === */
+        .access {
+            background-color: var(--main-color);
+        }
+        .access-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .access-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 430px; /* 地図が入るため少しだけ広めに */
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+        .access-card:hover {
+            transform: translateY(-5px);
+        }
+        .access-card h3 {
+            font-size: 22px;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+        .access-card p {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        .access-card .tel {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 25px;
+            letter-spacing: 1px;
+        }
+        .access-card .tel a {
+            color: inherit;
+            transition: opacity 0.3s;
+        }
+        .access-card .tel a:hover {
+            opacity: 0.7;
+        }
+
+        /* 地図用の追加スタイル */
+        .map-wrapper {
+            width: 100%;
+            height: 250px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: #eee;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .map-link {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+        .map-link:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
 
         /* === フッター === */
         footer {
@@ -478,41 +525,9 @@
             font-size: 13px;
         }
 
-        /* === レスポンシブ (スマホ向け設定) === */
+        /* === レスポンシブ === */
         @media (max-width: 768px) {
-            /* ハンバーガーアイコンを表示 */
-            .hamburger {
-                display: flex;
-            }
-            
-            /* メニューを右からスライドインする形に変更 */
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%; /* 初期状態は画面外 */
-                width: 70%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: rgba(255, 255, 255, 0.98);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 40px;
-                transition: right 0.4s ease;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                z-index: 1000;
-            }
-            
-            /* activeクラスが付いたら画面内に入る */
-            .nav-links.active {
-                right: 0;
-            }
-            
-            /* スマホ時のリンクの文字を大きく */
-            .nav-links a {
-                font-size: 18px;
-            }
-
+            .nav-links { display: none; }
             section { padding: 60px 5%; }
             .hero h1 { font-size: 32px; }
             .hero p { font-size: 15px; }
@@ -528,24 +543,13 @@
     <!-- ヘッダー -->
     <header>
         <div class="logo">湯口塾<span>高校部</span></div>
-        
-        <!-- 【追加】ハンバーガーメニューのアイコン -->
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        
-        <!-- ナビゲーションリンク -->
-        <nav class="nav-links" id="nav-links">
+        <nav class="nav-links">
             <a href="#classrooms">教室紹介</a>
             <a href="#courses">コース紹介</a>
             <a href="#results">合格実績</a>
+            <a href="#access">アクセス</a>
         </nav>
     </header>
-
-    <!-- 【追加】メニューを開いた時の背景を暗くする用 -->
-    <div class="overlay" id="overlay"></div>
 
     <!-- 1. ヒーローセクション -->
     <section class="hero">
@@ -553,16 +557,17 @@
             <h1 class="animate-up">湯口塾<span>高校部</span></h1>
             <p class="animate-up" style="transition-delay: 0.1s;">40年以上蓄積された確かな経験と実績で<br>子供たちをしっかりサポート</p>
             
+            <!-- ローカルの画像を読み込む設定 -->
             <div class="hero-achievement-img animate-up" style="transition-delay: 0.2s;">
-                <img src="./26sokuhou.png" alt="大学合格実績">
+                <img src="./26合格実績①.png" alt="大学合格実績">
             </div>
 
             <div class="notice-board animate-up" style="transition-delay: 0.3s;">
                 <h3>最新のお知らせ・休校情報</h3>
                 <ul class="notice-list">
-                    <li><span class="badge badge-red">休校連絡</span> <div>4/29(水)～5/5(火)はお休みです。</div></li>
-                    <li><span class="badge badge-blue">お知らせ</span> <div>新年度の体験授業の受付を随時行っています。</div></li>
-                    <li><span class="badge badge-green">合格速報</span> <div>2026年度の大学合格実績を掲載しました。</div></li>
+                    <li><span class="badge badge-red">休校連絡</span> <div>直近のお休みについては、各教室からの案内をご確認ください。</div></li>
+                    <li><span class="badge badge-blue">お知らせ</span> <div>新年度のコース案内・無料体験授業の受付を随時行っています。</div></li>
+                    <li><span class="badge badge-green">合格速報</span> <div>2025年度の大学合格実績を掲載しました。</div></li>
                 </ul>
             </div>
         </div>
@@ -578,14 +583,14 @@
             <p style="font-size: 15px; color: var(--text-light); font-weight: normal; margin-top: 20px;">対象高校は主に以下の通りです。</p>
             
             <div class="school-tags">
-                <span class="highlight">丸亀高校</span>
-                <span class="highlight">坂出高校</span>
-                <span class="highlight">観音寺第一高校</span>
-                <span class="highlight">香川高専(詫間キャンパス)</span>
-                <span class="highlight">高瀬高校</span>
-                <span class="highlight">香川西高校(特進科)</span>
+                <span>丸亀高校</span>
+                <span>坂出高校</span>
+                <span>観音寺第一高校</span>
+                <span>香川高専(詫間キャンパス)</span>
+                <span>高瀬高校</span>
+                <span>香川西高校(特進科)</span>
             </div>
-            
+                    
             <p style="font-size: 14px; color: var(--text-light); margin-top: 30px; font-weight: normal;">その他の高校につきましては、ご相談ください。</p>
         </div>
     </section>
@@ -809,6 +814,49 @@
 
         </div>
     </section>
+<!-- 5. アクセスセクション -->
+    <section id="access" class="access">
+        <h2 class="section-title animate-up">アクセス</h2>
+        <p class="section-desc animate-up">教室へのアクセス情報です。お問い合わせはお電話にて承っております。</p>
+
+        <div class="access-container animate-up">
+            
+            <!-- 高瀬本部教室 -->
+            <div class="access-card">
+                <h3>高瀬本部教室</h3>
+                <p>〒767-0003<br>香川県三豊市高瀬町比地中1317-7</p>
+                
+                <!-- Google Maps埋め込み -->
+                <div class="map-wrapper">
+                    <iframe src="https://maps.google.com/maps?q=湯口塾%20高瀬本部&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+                <!-- 指定されたマップリンク -->
+                <a href="https://maps.app.goo.gl/ZJu6Rbe6pHdWfwtZ7" target="_blank" rel="noopener noreferrer" class="map-link">Google Mapsで開く</a>
+                
+                <!-- 電話番号 (タップで発信可能) -->
+                <p class="tel"><a href="tel:0120273262">TEL: 0120-27-3262</a></p>
+            </div>
+            
+            <!-- 観音寺本部教室 -->
+            <div class="access-card">
+                <h3>観音寺本部教室</h3>
+                <p>※詳細な住所やアクセス方法については、<br>マップまたはお電話でご確認ください。</p>
+                
+                <!-- Google Maps埋め込み -->
+                <div class="map-wrapper">
+                    <iframe src="https://maps.google.com/maps?q=湯口塾%20観音寺本部&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <!-- 指定されたマップリンク -->
+                <a href="https://maps.app.goo.gl/QZyC4uzZhHdZNSnY6" target="_blank" rel="noopener noreferrer" class="map-link">Google Mapsで開く</a>
+                
+                <!-- 電話番号 (タップで発信可能。市外局番0875を補完) -->
+                <p class="tel"><a href="tel:0875241101">TEL: 0875-24-1101</a></p>
+            </div>
+
+        </div>
+    </section>
 
     <!-- フッター -->
     <footer>
@@ -817,32 +865,6 @@
 
     <!-- スクリプト -->
     <script>
-        // --- ハンバーガーメニュー開閉処理 ---
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        const overlay = document.getElementById('overlay');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        // メニューの開閉を切り替える関数
-        function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        // アイコンや背景をクリックしたらメニューを開閉する
-        hamburger.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-
-        // メニューの中のリンク（「教室紹介」など）をクリックしたらメニューを閉じる
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                if(navLinks.classList.contains('active')) {
-                    toggleMenu();
-                }
-            });
-        });
-
         // --- スクロールアニメーション ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
