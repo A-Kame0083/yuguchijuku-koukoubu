@@ -1442,9 +1442,10 @@
                     <input type="tel" id="phone" name="電話番号" class="form-control" placeholder="例：090-1234-5678" required>
                 </div>
 
+                <!-- 修正箇所：name属性をemailにし、required（必須）を追加 -->
                 <div class="form-group">
-                    <label for="email">メールアドレス <span class="optional">任意</span></label>
-                    <input type="email" id="email" name="メールアドレス" class="form-control" placeholder="例：info@example.com">
+                    <label for="email">メールアドレス <span class="required">必須</span></label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="例：info@example.com" required>
                 </div>
 
                 <div class="form-group">
@@ -1587,13 +1588,20 @@
                     let html = '';
 
                     for (let [key, value] of currentFormData.entries()) {
+                        
+                        // 修正箇所：キーが'email'の場合は確認画面で「メールアドレス」と表示する
+                        let displayKey = key;
+                        if(key === 'email') {
+                            displayKey = 'メールアドレス';
+                        }
+
                         const safeValue = value.replace(/&/g, '&amp;')
                                                .replace(/</g, '&lt;')
                                                .replace(/>/g, '&gt;')
                                                .replace(/"/g, '&quot;');
                         
                         html += `<div class="confirm-detail">
-                                    <strong>${key}</strong>
+                                    <strong>${displayKey}</strong>
                                     <div>${safeValue || '（未入力）'}</div>
                                  </div>`;
                     }
